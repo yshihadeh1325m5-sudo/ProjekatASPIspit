@@ -23,8 +23,9 @@ public partial class TeamsView : UserControl
     {
         InitializeComponent();
 
-        // 💥 Kažemo kontroli da čim se učita na ekran, povuče podatke
+
         this.Loaded += TeamsView_Loaded;
+
     }
 
     private async void TeamsView_Loaded(object sender, RoutedEventArgs e)
@@ -52,4 +53,5 @@ public partial class TeamsView : UserControl
             }
         }
     }
+
 }

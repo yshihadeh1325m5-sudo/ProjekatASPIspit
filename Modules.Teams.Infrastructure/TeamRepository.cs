@@ -4,34 +4,62 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Modules.Teams.Domain;
 
+using Microsoft.EntityFrameworkCore;
+using Modules.Teams.Domain;
+
 namespace Modules.Teams.Infrastructure;
 
 public class TeamRepository : ITeamRepository
 {
-    private readonly TeamsDbContext _context;
+    private readonly IDbContextFactory<TeamsDbContext> _contextFactory;
 
-    // Ubrizgavamo pravi kontekst koji smo upravo napravili
-    public TeamRepository(TeamsDbContext context)
+    // Umesto DbContext, ubrizgavamo fabriku za kreiranje konteksta
+    public TeamRepository(IDbContextFactory<TeamsDbContext> contextFactory)
     {
-        _context = context;
+        _contextFactory = contextFactory;
     }
 
-    // 1. Čitanje svih timova iz prave SQL baze
     public async Task<IEnumerable<Team>> GetAllAsync()
     {
-        return await _context.Teams.ToListAsync();
+        using var context = await _contextFactory.CreateDbContextAsync();
+        return await context.Teams.ToListAsync();
     }
 
-    // 2. Čitanje jednog tima po ID-ju
     public async Task<Team?> GetByIdAsync(Guid id)
     {
-        return await _context.Teams.FindAsync(id);
+        using var context = await _contextFactory.CreateDbContextAsync();
+        return await context.Teams.FindAsync(id);
     }
 
-    // 3. Upisivanje novog tima u pravu SQL bazu
     public async Task AddAsync(Team team)
     {
-        await _context.Teams.AddAsync(team);
-        await _context.SaveChangesAsync();
+        using var context = await _contextFactory.CreateDbContextAsync();
+        await context.Teams.AddAsync(team);
+        await context.SaveChangesAsync();
+    }
+
+    public async Task DeleteAsync(Guid id)
+    {
+        using var context = await _contextFactory.CreateDbContextAsync();
+        var team = await context.Teams.FindAsync(id);
+        if (team != null)
+        {
+            context.Teams.Remove(team);
+            await context.SaveChangesAsync();
+        }
+    }
+    public async Task UpdateAsync(Team team)
+    {
+    
+        using var context = await _contextFactory.CreateDbContextAsync();
+
+        var existingTeam = await context.Teams.FindAsync(team.Id);
+
+        if (existingTeam != null)
+        {
+ 
+            existingTeam.UpdateDetails(team.Name, team.Stadium);
+            await context.SaveChangesAsync();
+        }
     }
 }

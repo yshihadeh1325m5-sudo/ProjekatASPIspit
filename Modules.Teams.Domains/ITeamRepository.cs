@@ -9,4 +9,6 @@ public interface ITeamRepository
     Task<Team?> GetByIdAsync(Guid id);
     Task<IEnumerable<Team>> GetAllAsync();
     Task AddAsync(Team team);
+    Task DeleteAsync(Guid id);
+    Task UpdateAsync(Team team);
 }

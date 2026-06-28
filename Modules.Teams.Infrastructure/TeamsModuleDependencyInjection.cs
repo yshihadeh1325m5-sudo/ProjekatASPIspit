@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Modules.Teams.Domain;
-using Modules.Teams.Infrastructure;
+using Modules.Teams.Application.Commands.CreateTeam;
+using Modules.Teams.Application.Commands.UpdateTeam;
 using Modules.Teams.Application.Teams.Commands.CreateTeam;
 using Modules.Teams.Application.Teams.Queries.GetTeams;
+using Modules.Teams.Domain;
+using Modules.Teams.Infrastructure;
 
 namespace Modules.Teams.Infrastructure;
 
@@ -12,17 +14,16 @@ public static class TeamsModuleDependencyInjection
 {
     public static IServiceCollection AddTeamsModule(this IServiceCollection services, IConfiguration configuration)
     {
-        // 1. Registrovan TeamsDbContext koji vuče "DefaultConnection" iz appsettings.json glavnog projekta
-        // Promeni liniju 17 u ovo:
-        services.AddDbContext<TeamsDbContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")),
-            ServiceLifetime.Transient); // Dodaj ovo ovde
+        // Registrujemo fabriku umesto direktnog DbContext servisa
+        services.AddDbContextFactory<TeamsDbContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-        // 2. Tvoj repository i handler-i ostaju registrovani
         services.AddScoped<ITeamRepository, TeamRepository>();
 
         services.AddTransient<CreateTeamCommandHandler>();
         services.AddTransient<GetTeamsQueryHandler>();
+        services.AddTransient<DeleteTeamCommandHandler>();
+        services.AddTransient<UpdateTeamCommandHandler>();
 
         return services;
     }

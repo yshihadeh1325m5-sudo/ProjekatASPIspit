@@ -1,48 +1,84 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Modules.Teams.Application.Commands.CreateTeam;
+using Modules.Teams.Application.Commands.UpdateTeam;
+using Modules.Teams.Application.Teams.Commands.CreateTeam;
+using Modules.Teams.Application.Teams.Queries.GetTeams;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using Modules.Teams.Application.Teams.Queries.GetTeams;
-using Modules.Teams.Application.Teams.Commands.CreateTeam;
 
 namespace Modules.Teams.UI.Viewmodels;
 
-public class TeamsViewModel
+public partial class TeamsViewModel : ObservableObject 
 {
     private readonly GetTeamsQueryHandler _getTeamsHandler;
     private readonly CreateTeamCommandHandler _createTeamHandler;
+    private readonly DeleteTeamCommandHandler _deleteTeamHandler;
+    private readonly UpdateTeamCommandHandler _updateTeamHandler;
 
     public ObservableCollection<TeamDto> Teams { get; set; } = new();
 
-    public TeamsViewModel(GetTeamsQueryHandler getTeamsHandler, CreateTeamCommandHandler createTeamHandler)
+
+    public TeamsViewModel(
+        GetTeamsQueryHandler getTeamsHandler,
+        CreateTeamCommandHandler createTeamHandler,
+        DeleteTeamCommandHandler deleteTeamHandler,
+        UpdateTeamCommandHandler updateTeamHandler)
+        
+        
     {
         _getTeamsHandler = getTeamsHandler;
         _createTeamHandler = createTeamHandler;
+        _deleteTeamHandler = deleteTeamHandler;
+        _updateTeamHandler = updateTeamHandler;
 
-        // Iskoristili smo discard (_) da utišamo CS4014 warning i eksplicitno stavimo do znanja 
-        // kompajleru da namerno puštamo asinhronu operaciju "u pozadini" tokom inicijalizacije.
         _ = UcitajTimoveAsync();
     }
 
     public async Task UcitajTimoveAsync()
     {
-        var timoviIzBaze = await _getTeamsHandler.HandleAsync(new GetTeamsQuery());
+        // Povlačenje podataka iz baze preko handlera
+        var listaIzBaze = await _getTeamsHandler.HandleAsync(new GetTeamsQuery());
 
+        // Obavezno čišćenje i ponovno punjenje da bi UI primetio promenu
         Teams.Clear();
-        foreach (var tim in timoviIzBaze)
+        foreach (var tim in listaIzBaze)
         {
             Teams.Add(tim);
         }
     }
+   
+
+    [RelayCommand] 
+    public async Task Delete(Guid id)
+    {
+        await _deleteTeamHandler.HandleAsync(new DeleteTeamCommand(id));
+        await UcitajTimoveAsync(); 
+    }
 
     public async Task DodajTimAsync(string name, string stadium)
     {
-        // Pozivamo komandu za kreiranje novog tima u bazi
         await _createTeamHandler.HandleAsync(new CreateTeamCommand(name, stadium));
-
-        // Odmah osvežavamo kolekciju kako bi tabela automatski prikazala novi tim
         await UcitajTimoveAsync();
+    }
+
+
+
+    [RelayCommand]
+    public async Task Update(TeamDto team)
+    {
+        System.Diagnostics.Debug.WriteLine($"Pozvan Update za tim: {team.Name}");
+        try
+        {
+            await _updateTeamHandler.HandleAsync(new UpdateTeamCommand(team.Id, team.Name, team.Stadium));
+
+            // POSLE ovoga, stavi breakpoint ovde
+            await UcitajTimoveAsync();
+        }
+        catch (Exception ex)
+        {
+            // Ako ovde upadne, izbaciće ti poruku u Output prozor
+            System.Diagnostics.Debug.WriteLine("GREŠKA: " + ex.Message);
+        }
     }
 }

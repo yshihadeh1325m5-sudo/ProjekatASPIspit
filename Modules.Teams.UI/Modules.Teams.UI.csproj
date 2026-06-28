@@ -8,6 +8,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Modules.Teams.Application\Modules.Teams.Application.csproj" />
 	</ItemGroup>
 
