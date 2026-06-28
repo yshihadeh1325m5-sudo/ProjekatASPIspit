@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Modules.Teams.UI.Views.TeamsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="White">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Upravljanje Timovima (CQRS)" FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Teams}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,0,0,20">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID Tima" Binding="{Binding Id}" Width="Auto"/>
+                <DataGridTextColumn Header="Naziv Kluba" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Stadion" Binding="{Binding Stadium}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+            <TextBlock Text="Ime kluba:" VerticalAlignment="Center" Margin="5"/>
+            <TextBox x:Name="TxtName" Width="150" Margin="5" VerticalContentAlignment="Center"/>
+
+            <TextBlock Text="Stadion:" VerticalAlignment="Center" Margin="15,5,5,5"/>
+            <TextBox x:Name="TxtStadium" Width="150" Margin="5" VerticalContentAlignment="Center"/>
+
+            <Button Content="Dodaj Novi Tim" Width="120" Margin="15,5,5,5" Click="BtnDodaj_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

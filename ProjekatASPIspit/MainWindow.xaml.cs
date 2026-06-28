@@ -1,24 +1,25 @@
-﻿using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
+using Modules.Teams.UI.Views; // 👈 Direktan using za tvoj TeamsView
+using Modules.Teams.UI.Viewmodels;
 
-namespace ProjekatASPIspit
+namespace ProjekatASPIspit;
+
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow(TeamsViewModel teamsViewModel)
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
+        InitializeComponent();
+
+        // 1. Vezujemo ViewModel za glavni prozor
+        this.DataContext = teamsViewModel;
+
+        // 2. Pravimo TeamsView direktno kroz C# (tako zaobilazimo bagoviti XAML dizajner)
+        var teamsViewKontrola = new TeamsView();
+
+        // 3. Prosleđujemo joj isti ovaj ViewModel da bi tabela videla podatke
+        teamsViewKontrola.DataContext = teamsViewModel;
+
+        // 4. Ubacujemo je unutar ekrana u naš Grid
+        GlavniGrid.Children.Add(teamsViewKontrola);
     }
 }
