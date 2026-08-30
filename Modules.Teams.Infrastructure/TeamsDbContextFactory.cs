@@ -12,7 +12,6 @@ public class TeamsDbContextFactory : IDesignTimeDbContextFactory<TeamsDbContext>
     {
         var optionsBuilder = new DbContextOptionsBuilder<TeamsDbContext>();
 
-        // Ovde upiši tvoj konekcioni string na bazu. EF alat će koristiti ovo samo za pravljenje migracije!
         optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ProjekatASPIspitDb;Trusted_Connection=True;TrustServerCertificate=True;");
 
         return new TeamsDbContext(optionsBuilder.Options);

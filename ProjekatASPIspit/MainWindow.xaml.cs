@@ -1,25 +1,42 @@
-﻿using System.Windows;
-using Modules.Teams.UI.Views; // 👈 Direktan using za tvoj TeamsView
+﻿using Microsoft.Extensions.DependencyInjection;
+using Modules.Matches.Ui.ViewModels;
+using Modules.Matches.Ui.View;
 using Modules.Teams.UI.Viewmodels;
+using Modules.Teams.UI.Views;
+using System.Windows;
 
 namespace ProjekatASPIspit;
 
 public partial class MainWindow : Window
 {
+    private readonly TeamsViewModel _teamsViewModel;
+
     public MainWindow(TeamsViewModel teamsViewModel)
     {
         InitializeComponent();
 
-        // 1. Vezujemo ViewModel za glavni prozor
-        this.DataContext = teamsViewModel;
+        _teamsViewModel = teamsViewModel;
+        this.DataContext = _teamsViewModel;
 
-        // 2. Pravimo TeamsView direktno kroz C# (tako zaobilazimo bagoviti XAML dizajner)
+        // Inicijalni prikaz Teams modula u gridu
         var teamsViewKontrola = new TeamsView();
-
-        // 3. Prosleđujemo joj isti ovaj ViewModel da bi tabela videla podatke
-        teamsViewKontrola.DataContext = teamsViewModel;
-
-        // 4. Ubacujemo je unutar ekrana u naš Grid
+        teamsViewKontrola.DataContext = _teamsViewModel;
         GlavniGrid.Children.Add(teamsViewKontrola);
+    }
+
+    private void OpenMatchesButton_Click(object sender, RoutedEventArgs e)
+    {
+        // Očisti prethodni sadržaj iz grida
+        GlavniGrid.Children.Clear();
+
+        // Povuci Matches ViewModel preko DI kontejnera i postavi DataContext preko objektne inicijalizacije
+        var matchesViewModel = App.ServiceProvider.GetRequiredService<MatchesViewModel>();
+        var matchesViewKontrola = new MatchesViewxaml
+        {
+            DataContext = matchesViewModel
+        };
+
+        // Dodaj kontrolu u glavni grid
+        GlavniGrid.Children.Add(matchesViewKontrola);
     }
 }

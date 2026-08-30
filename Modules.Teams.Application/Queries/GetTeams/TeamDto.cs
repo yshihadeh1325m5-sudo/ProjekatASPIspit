@@ -10,7 +10,7 @@ public class TeamDto
     public string Name { get; set; }
     public string Stadium { get; set; }
 
-    // Dodaj konstruktor ako ti treba, ali get;set; je ključan
+    
     public TeamDto(Guid id, string name, string stadium)
     {
         Id = id;

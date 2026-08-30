@@ -58,6 +58,11 @@
                     Width="120" 
                     Margin="15,5,5,5" 
                     Click="BtnDodaj_Click"/>
+
+            <Button Content="Dodaj Novu Utakmicu" 
+                    Width="130" 
+                    Margin="15,5,5,5" 
+                    Click="BtnOtvoriMatches_Click"/>
         </StackPanel>
     </Grid>
-</UserControl> 
+</UserControl>
