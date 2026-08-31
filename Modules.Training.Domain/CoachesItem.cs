@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Shared.Kernel;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Modules.Coaches.Domain
 {
-    public class CoachesItem
+    public class CoachesItem : BaseEntity
     {
         public Guid Id { get; private set; }
         public string Ime { get; private set; }

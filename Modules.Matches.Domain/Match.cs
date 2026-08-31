@@ -1,8 +1,9 @@
 ﻿using System;
+using Shared.Kernel;
 
 namespace Modules.Matches.Domain
 {
-    public class Match
+    public class Match : BaseEntity
     {
         public Guid Id { get; private set; }
         public Guid HomeTeamId { get; private set; }

@@ -1,8 +1,9 @@
-﻿using System;
+﻿using Shared.Kernel;
+using System;
 
 namespace Modules.Stuff.Domain
 {
-    public class StuffItem
+    public class StuffItem : BaseEntity
     {
         public Guid Id { get; private set; }
         public string Name { get; private set; }
