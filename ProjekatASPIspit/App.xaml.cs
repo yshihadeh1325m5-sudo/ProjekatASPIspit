@@ -6,6 +6,9 @@ using Modules.Stuff.Infrastructure;
 using Modules.Teams.UI.Viewmodels;
 using Modules.Matches.Ui.ViewModels;
 using Modules.Stuff.Ui.Viewmodels;
+using Modules.Coaches.Ui.Viewmodels;
+using Modules.Coaches.Infrastructure;
+
 using System;
 using System.IO;
 using System.Windows;
@@ -33,10 +36,12 @@ public partial class App : Application
         services.AddMatchesModule(configuration);
 
         services.AddStuffModule(configuration);
+        services.AddCoachesModule(configuration);
 
         services.AddTransient<TeamsViewModel>();
         services.AddTransient<MatchesViewModel>();
         services.AddTransient<StuffViewModel>();
+        services.AddTransient<CoachesViewModel>();
         services.AddTransient<MainWindow>();
 
         // Izgradnja kontejnera

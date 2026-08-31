@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Modules.Coaches.Ui\Modules.Coaches.Ui.csproj" />
     <ProjectReference Include="..\Modules.Matches.Application\Modules.Matches.Application.csproj" />
     <ProjectReference Include="..\Modules.Matches.Infrastructure\Modules.Matches.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules.Matches.Ui\Modules.Matches.Ui.csproj" />
@@ -29,7 +30,8 @@
     <ProjectReference Include="..\Modules.Stuff.Infrastructure\Modules.Stuff.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules.Teams.Infrastructure\Modules.Teams.Infrastructure.csproj" />
     <ProjectReference Include="..\Modules.Teams.UI\Modules.Teams.UI.csproj" />
-    <ProjectReference Include="..\Modules.Training.Application\Modules.Training.Application.csproj" />
+    <ProjectReference Include="..\Modules.Training.Application\Modules.Coaches.Application.csproj" />
+    <ProjectReference Include="..\Modules.Training.Infrastructure\Modules.Coaches.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

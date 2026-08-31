@@ -68,6 +68,11 @@
                     Width="120" 
                     Margin="15,5,5,5" 
                     Click="BtnOtvoriStuff_Click"/>
+
+            <Button Content="Otvori Coaches" 
+                    Width="120" 
+                    Margin="15,5,5,5" 
+                    Click="BtnOtvoriCoaches_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>

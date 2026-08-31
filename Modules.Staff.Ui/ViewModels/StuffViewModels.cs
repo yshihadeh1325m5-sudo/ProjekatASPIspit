@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Modules.Stuff.Application.Commands.CreateStuff;
+
 using Modules.Stuff.Application.Commands.UpdateStuff;
 using Modules.Stuff.Application.Queries.GetStuff;
 using System;
@@ -28,22 +29,7 @@ namespace Modules.Stuff.Ui.Viewmodels
         private string _description = string.Empty;
 
         [ObservableProperty]
-        private decimal _price;
-
-        [ObservableProperty]
-        private StuffDto? _selectedItem;
-
-        // Automatski se poziva kada korisnik klikne na red u DataGrid-u
-        partial void OnSelectedItemChanged(StuffDto? value)
-        {
-            if (value != null)
-            {
-                Name = value.Name;
-                Code = value.Code;
-                Price = value.Price;
-                Description = value.Description;
-            }
-        }
+        private decimal _price; // ili količina/cena zavisno od tvoje baze
 
         public StuffViewModel(
             GetStuffQueryHandler getStuffHandler,
@@ -73,11 +59,13 @@ namespace Modules.Stuff.Ui.Viewmodels
         [RelayCommand]
         public async Task Dodaj()
         {
+            // Tačan redosled prema tvom CreateStuffCommand(string Name, string Code, decimal Price, string Description)
             var command = new CreateStuffCommand(Name, Code, Price, Description);
 
             await _createStuffHandler.HandleAsync(command);
             await UcitajStvariAsync();
 
+            // Resetovanje polja forme nakon uspešnog unosa
             Name = string.Empty;
             Code = string.Empty;
             Price = 0;
@@ -92,15 +80,12 @@ namespace Modules.Stuff.Ui.Viewmodels
         }
 
         [RelayCommand]
-        public async Task Update()
+        public async Task Update(StuffDto stuff)
         {
-            if (SelectedItem == null) return;
-
+            System.Diagnostics.Debug.WriteLine($"Pozvan Update za artikal: {stuff.Name}");
             try
             {
-                // Uzima ID selektovanog elementa, a nove vrednosti iz Textbox polja
-                var command = new UpdateStuffCommand(SelectedItem.Id, Name, Code, Price, Description);
-                await _updateStuffHandler.HandleAsync(command);
+                await _updateStuffHandler.HandleAsync(new UpdateStuffCommand(stuff.Id, stuff.Name, stuff.Code, stuff.Price, stuff.Description));
                 await UcitajStvariAsync();
             }
             catch (Exception ex)

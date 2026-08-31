@@ -3,7 +3,6 @@
 		<TargetFramework>net10.0-windows</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<UseWPF>true</UseWPF>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -15,10 +14,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Modules.Coaches.Ui\Modules.Coaches.Ui.csproj" />
-		<ProjectReference Include="..\Modules.Matches.Domain\Modules.Matches.Domain.csproj" />
-		<ProjectReference Include="..\Modules.Matches.Infrastructure\Modules.Matches.Infrastructure.csproj" />
-		<ProjectReference Include="..\Modules.Matches.Ui\Modules.Matches.Ui.csproj" />
-		<ProjectReference Include="..\Modules.Staff.Ui\Modules.Stuff.Ui.csproj" />
-		<ProjectReference Include="..\Modules.Teams.Application\Modules.Teams.Application.csproj" />
+		<ProjectReference Include="..\Modules.Training.Application\Modules.Coaches.Application.csproj" />
+		<ProjectReference Include="..\Modules.Training.Domain\Modules.Coaches.Domain.csproj" />
 	</ItemGroup>
 </Project>

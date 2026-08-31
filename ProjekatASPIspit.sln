@@ -41,15 +41,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Stuff.Application",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Stuff.Infrastructure", "Modules.Stuff.Infrastructure\Modules.Stuff.Infrastructure.csproj", "{0875D1CC-AEB5-48CE-8D16-F5B5CA1AE270}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Training", "Training", "{12EC50B6-34D5-485A-A5E5-3E7002EF101A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Coaches", "Coaches", "{12EC50B6-34D5-485A-A5E5-3E7002EF101A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Users", "Users", "{68B25DEA-84FF-4E45-B907-6BA2B5B264AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Training.Domain", "Modules.Training.Domain\Modules.Training.Domain.csproj", "{DE8A52DC-4FB7-44F4-9E2B-B148AEEB450B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Coaches.Domain", "Modules.Training.Domain\Modules.Coaches.Domain.csproj", "{DE8A52DC-4FB7-44F4-9E2B-B148AEEB450B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Training.Application", "Modules.Training.Application\Modules.Training.Application.csproj", "{DAFE57B3-9FDB-44D9-883F-53ED31C3B644}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Coaches.Application", "Modules.Training.Application\Modules.Coaches.Application.csproj", "{DAFE57B3-9FDB-44D9-883F-53ED31C3B644}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Training.Infrastructure", "Modules.Training.Infrastructure\Modules.Training.Infrastructure.csproj", "{32BF94E3-3A9C-45DB-8348-CF2798448946}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Coaches.Infrastructure", "Modules.Training.Infrastructure\Modules.Coaches.Infrastructure.csproj", "{32BF94E3-3A9C-45DB-8348-CF2798448946}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Users.Domain", "Modules.Users.Domain\Modules.Users.Domain.csproj", "{72126808-7167-4516-99A8-495B7A513627}"
 EndProject
@@ -62,6 +62,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Matches.Ui", "Modules.Matches.Ui\Modules.Matches.Ui.csproj", "{2DAC0314-3CF0-4E04-8A55-DF45E98B9C11}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Stuff.Ui", "Modules.Staff.Ui\Modules.Stuff.Ui.csproj", "{BD6188D7-64A5-445B-8A9A-C6D02F72B6B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Modules.Coaches.Ui", "Modules.Coaches.Ui\Modules.Coaches.Ui.csproj", "{ABD0AA62-6855-4459-9FE7-1AB10DBB57B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -157,6 +159,10 @@ Global
 		{BD6188D7-64A5-445B-8A9A-C6D02F72B6B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD6188D7-64A5-445B-8A9A-C6D02F72B6B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD6188D7-64A5-445B-8A9A-C6D02F72B6B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABD0AA62-6855-4459-9FE7-1AB10DBB57B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABD0AA62-6855-4459-9FE7-1AB10DBB57B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABD0AA62-6855-4459-9FE7-1AB10DBB57B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABD0AA62-6855-4459-9FE7-1AB10DBB57B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -190,6 +196,7 @@ Global
 		{E0806455-7283-48F3-BAE1-A47705B692AB} = {65CAAFFB-FEAC-4638-B67E-F3142CB29027}
 		{2DAC0314-3CF0-4E04-8A55-DF45E98B9C11} = {717FABE7-EF8E-43FD-A85D-3A3B3D421CBE}
 		{BD6188D7-64A5-445B-8A9A-C6D02F72B6B9} = {E11790DC-E7C2-4912-B510-1C1AF6EF825B}
+		{ABD0AA62-6855-4459-9FE7-1AB10DBB57B5} = {12EC50B6-34D5-485A-A5E5-3E7002EF101A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {67DD42B7-F260-41FF-8B56-61A3768A8E2A}
