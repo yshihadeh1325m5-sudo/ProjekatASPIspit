@@ -26,17 +26,31 @@ public partial class MainWindow : Window
 
     private void OpenMatchesButton_Click(object sender, RoutedEventArgs e)
     {
-        // Očisti prethodni sadržaj iz grida
+
         GlavniGrid.Children.Clear();
 
-        // Povuci Matches ViewModel preko DI kontejnera i postavi DataContext preko objektne inicijalizacije
+    
         var matchesViewModel = App.ServiceProvider.GetRequiredService<MatchesViewModel>();
         var matchesViewKontrola = new MatchesViewxaml
         {
             DataContext = matchesViewModel
         };
 
-        // Dodaj kontrolu u glavni grid
         GlavniGrid.Children.Add(matchesViewKontrola);
+    }
+
+    private void OpenStuffButton_Click(object sender, RoutedEventArgs e)
+    {
+     
+        GlavniGrid.Children.Clear();
+
+     
+        var stuffViewModel = App.ServiceProvider.GetRequiredService<Modules.Stuff.Ui.Viewmodels.StuffViewModel>();
+        var stuffViewKontrola = new Modules.Stuff.Ui.View.StuffView
+        {
+            DataContext = stuffViewModel
+        };
+
+        GlavniGrid.Children.Add(stuffViewKontrola);
     }
 }

@@ -7,7 +7,7 @@ namespace Modules.Matches.Application.Commands.CreateMatch
 {
     public class DeleteMatchCommandHandler
     {
-        private readonly IMatchRepository _repository; // Samo interfejs!
+        private readonly IMatchRepository _repository; 
 
         public DeleteMatchCommandHandler(IMatchRepository repository)
         {
@@ -16,7 +16,7 @@ namespace Modules.Matches.Application.Commands.CreateMatch
 
         public async Task HandleAsync(DeleteMatchCommand command)
         {
-            // Komanda samo poziva metodu repozitorijuma
+
             await _repository.DeleteAsync(command.Id);
         }
     }

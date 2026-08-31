@@ -14,7 +14,7 @@ public static class TeamsModuleDependencyInjection
 {
     public static IServiceCollection AddTeamsModule(this IServiceCollection services, IConfiguration configuration)
     {
-        // Registrujemo fabriku umesto direktnog DbContext servisa
+ 
         services.AddDbContextFactory<TeamsDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 

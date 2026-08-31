@@ -1,16 +1,14 @@
-﻿using Modules.Matches.Domain;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿using System;
+using System.Threading.Tasks;
+using Modules.Matches.Domain;
 
 namespace Modules.Matches.Application.Commands.Update
 {
-    public class UpdateTeamCommandHandler
+    public class UpdateMatchCommandHandler
     {
         private readonly IMatchRepository _repository;
 
-        public UpdateTeamCommandHandler(IMatchRepository repository)
+        public UpdateMatchCommandHandler(IMatchRepository repository)
         {
             _repository = repository;
         }
@@ -19,11 +17,9 @@ namespace Modules.Matches.Application.Commands.Update
         {
             var match = await _repository.GetByIdAsync(command.Id);
 
-
             if (match != null)
             {
-
-                match.UpdateDetails(command.HomeScore, command.AwayScore);
+                match.UpdateDetails(command.HomeTeamId, command.AwayTeamId, command.HomeScore, command.AwayScore, command.MatchDate);
 
                 await _repository.UpdateAsync(match);
             }

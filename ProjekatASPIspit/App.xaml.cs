@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Modules.Matches.Infrastructure;
-using Modules.Matches.Ui.ViewModels;
 using Modules.Teams.Infrastructure;
+using Modules.Stuff.Infrastructure; 
 using Modules.Teams.UI.Viewmodels;
+using Modules.Matches.Ui.ViewModels;
+using Modules.Stuff.Ui.Viewmodels;
 using System;
 using System.IO;
 using System.Windows;
@@ -14,7 +16,6 @@ public partial class App : Application
 {
     public static IServiceProvider ServiceProvider { get; private set; } = null!;
 
-    // Nestatička metoda koja omogućava modulima da bezbedno pristupe statičkom kontejneru preko dynamic-a
     public IServiceProvider GetServiceProvider() => ServiceProvider;
 
     protected override void OnStartup(StartupEventArgs e)
@@ -31,8 +32,11 @@ public partial class App : Application
         services.AddTeamsModule(configuration);
         services.AddMatchesModule(configuration);
 
+        services.AddStuffModule(configuration);
+
         services.AddTransient<TeamsViewModel>();
         services.AddTransient<MatchesViewModel>();
+        services.AddTransient<StuffViewModel>();
         services.AddTransient<MainWindow>();
 
         // Izgradnja kontejnera

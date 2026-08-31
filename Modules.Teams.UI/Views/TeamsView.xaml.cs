@@ -2,9 +2,11 @@
 using Modules.Matches.Ui.View;
 using Modules.Matches.Ui.ViewModels;
 using Modules.Teams.UI.Viewmodels;
+using Modules.Stuff.Ui.Viewmodels;
 using System;
 using System.Windows;
 using System.Windows.Controls;
+using Modules.Stuff.Ui.View;
 
 namespace Modules.Teams.UI.Views;
 
@@ -60,6 +62,28 @@ public partial class TeamsView : UserControl
                     DataContext = matchesViewModel
                 };
                 glavniGrid.Children.Add(matchesView);
+            }
+        }
+    }
+    private void BtnOtvoriStuff_Click(object sender, RoutedEventArgs e)
+    {
+        var mainWindow = global::System.Windows.Application.Current.MainWindow;
+        if (mainWindow != null)
+        {
+            var glavniGrid = mainWindow.FindName("GlavniGrid") as Grid;
+            if (glavniGrid != null)
+            {
+                glavniGrid.Children.Clear();
+
+                var app = global::System.Windows.Application.Current;
+                IServiceProvider provider = ((dynamic)app).GetServiceProvider();
+                var stuffViewModel = provider.GetRequiredService<StuffViewModel>();
+
+                var stuffView = new StuffView
+                {
+                    DataContext = stuffViewModel
+                };
+                glavniGrid.Children.Add(stuffView);
             }
         }
     }

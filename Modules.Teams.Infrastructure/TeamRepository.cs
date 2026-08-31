@@ -4,8 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Modules.Teams.Domain;
 
-using Microsoft.EntityFrameworkCore;
-using Modules.Teams.Domain;
+
 
 namespace Modules.Teams.Infrastructure;
 
@@ -13,7 +12,7 @@ public class TeamRepository : ITeamRepository
 {
     private readonly IDbContextFactory<TeamsDbContext> _contextFactory;
 
-    // Umesto DbContext, ubrizgavamo fabriku za kreiranje konteksta
+
     public TeamRepository(IDbContextFactory<TeamsDbContext> contextFactory)
     {
         _contextFactory = contextFactory;

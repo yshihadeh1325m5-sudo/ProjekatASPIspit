@@ -7,7 +7,7 @@ namespace Modules.Teams.Application.Commands.CreateTeam
 {
     public class DeleteTeamCommandHandler
     {
-        private readonly ITeamRepository _repository; // Samo interfejs!
+        private readonly ITeamRepository _repository; 
 
         public DeleteTeamCommandHandler(ITeamRepository repository)
         {
@@ -16,7 +16,7 @@ namespace Modules.Teams.Application.Commands.CreateTeam
 
         public async Task HandleAsync(DeleteTeamCommand command)
         {
-            // Komanda samo poziva metodu repozitorijuma
+
             await _repository.DeleteAsync(command.Id);
         }
     }

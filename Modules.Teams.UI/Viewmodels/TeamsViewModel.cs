@@ -37,10 +37,9 @@ public partial class TeamsViewModel : ObservableObject
 
     public async Task UcitajTimoveAsync()
     {
-        // Povlačenje podataka iz baze preko handlera
+
         var listaIzBaze = await _getTeamsHandler.HandleAsync(new GetTeamsQuery());
 
-        // Obavezno čišćenje i ponovno punjenje da bi UI primetio promenu
         Teams.Clear();
         foreach (var tim in listaIzBaze)
         {

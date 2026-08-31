@@ -12,15 +12,13 @@ namespace Modules.Matches.Infrastructure
         {
         }
 
-        // Ovo je ključna linija - mapira tvoj entitet na tabelu u bazi
+    
         public DbSet<Match> Matches { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            // Ovde možeš definisati konfiguracije ako ti zatrebaju kasnije, 
-            // npr. za Id ili odnose između tabela.
             modelBuilder.Entity<Match>().HasKey(m => m.Id);
         }
     }
